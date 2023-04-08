@@ -16,13 +16,6 @@ public class Util {
         try {
             Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            if (!connection.isClosed()) {
-                System.out.println("Соединение с БД установлено!");
-            }
-            connection.close();
-            if (connection.isClosed()) {
-                System.out.println("Соединение с БД закрыто!");
-            }
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Не удалось загрузить класс драйвера!");;
         }

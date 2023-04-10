@@ -2,6 +2,7 @@ package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.service.UserServiceImpl;
 import jm.task.core.jdbc.util.Util;
 
 import java.sql.Connection;
@@ -11,29 +12,29 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
+        UserServiceImpl user = new UserServiceImpl();
+
         //Создать таблицу
-        UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
-        userDaoJDBC.createUsersTable();
+        user.createUsersTable();
 
         //Добавить 4 юзера с данными. Вывод в консоль по каждому юзеру.
-        userDaoJDBC.saveUser("Stas", "Popov", (byte) 27);
-        userDaoJDBC.saveUser("Katya", "Valyshkina", (byte) 23);
-        userDaoJDBC.saveUser("Tanya", "Plotkina", (byte) 24);
-        userDaoJDBC.saveUser("Valentin", "Lazy", (byte) 27);
+        user.saveUser("Stas", "Popov", (byte) 27);
+        user.saveUser("Katya", "Valyshkina", (byte) 23);
+        user.saveUser("Tanya", "Plotkina", (byte) 24);
+        user.saveUser("Valentin", "Lazy", (byte) 27);
 
         //Удалить юзера по ИД
-        userDaoJDBC.removeUserById(2);
+        user.removeUserById(2);
 
         //Вывести список юзеров. Вывод юзеров в консоль.
-        List<User> userList = userDaoJDBC.getAllUsers();
-        for (User u : userList) {
+        for (User u : user.getAllUsers()) {
             System.out.println(u);
         }
 
         //Очистить таблицу
-        userDaoJDBC.cleanUsersTable();
+        user.cleanUsersTable();
 
         //Удалить таблицу
-        userDaoJDBC.dropUsersTable();
+        user.dropUsersTable();
     }
 }

@@ -26,8 +26,8 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                 DEFAULT CHARACTER SET = utf8;""";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Не удается создать таблицу");;
+        } catch (SQLException ignored) {
+
         }
     }
 
@@ -36,8 +36,8 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         String sql = "drop table users";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Не удалось произвести удаление таблицы");
+        } catch (SQLException ignored) {
+
         }
     }
 
@@ -49,8 +49,8 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             preparedStatement.setString(2, lastName);
             preparedStatement.setInt(3, age);
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Не удается создать пользователя");
+        } catch (SQLException ignored) {
+
         }
     }
 
@@ -60,8 +60,8 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, (int) id);
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Не удается создать пользователя");
+        } catch (SQLException ignored) {
+
         }
     }
 
@@ -69,18 +69,18 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
         String sql = "select * from users";
-        User user = new User();
         try (Connection connection = getConnection(); Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
+                User user = new User();
                 user.setId(resultSet.getLong("id"));
                 user.setName(resultSet.getString("name"));
                 user.setLastName(resultSet.getString("lastname"));
                 user.setAge(resultSet.getByte("age"));
                 userList.add(user);
             }
-        } catch (SQLException e) {
-            System.out.println("Не удается получить всех пользователей");
+        } catch (SQLException ignored) {
+
         }
         return userList;
     }
@@ -90,8 +90,8 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         String sql = "DELETE FROM users";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Не удается удалить пользователей");
+        } catch (SQLException ignored) {
+
         }
     }
 }

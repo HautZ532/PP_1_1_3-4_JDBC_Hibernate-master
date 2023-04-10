@@ -16,7 +16,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     //Создание таблицы
     public void createUsersTable() {
         String sql = """
-                CREATE TABLE `java_pre_project_1`.`users` (
+                create table if not exists `java_pre_project_1`.`users` (
                   `id` INT NOT NULL AUTO_INCREMENT,
                   `name` VARCHAR(45) NOT NULL,
                   `lastname` VARCHAR(45) NOT NULL,
@@ -26,31 +26,31 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                 DEFAULT CHARACTER SET = utf8;""";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.executeUpdate();
-        } catch (SQLException ignored) {
-
+        } catch (SQLException e) {
+            System.out.println("Не удалось создать таблицу!");
         }
     }
 
     //Удаление таблицы
     public void dropUsersTable() {
-        String sql = "drop table users";
+        String sql = "drop table if exists users";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
-        } catch (SQLException ignored) {
-
+        } catch (SQLException e) {
+            System.out.println("Не удалось удалить таблицу!");
         }
     }
 
     //Добавление юзера
     public void saveUser(String name, String lastName, byte age) {
-        String sql = "INSERT INTO users (name, lastname, age) VALUES(?, ?, ?)";
+        String sql = "insert into users (name, lastname, age) VALUES(?, ?, ?)";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
             preparedStatement.setInt(3, age);
             preparedStatement.executeUpdate();
-        } catch (SQLException ignored) {
-
+        } catch (SQLException e) {
+            System.out.println("Не удалось добавить пользователя!");
         }
     }
 
@@ -60,8 +60,8 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, (int) id);
             preparedStatement.executeUpdate();
-        } catch (SQLException ignored) {
-
+        } catch (SQLException e) {
+            System.out.println("Не удалось удалить пользователя по ID!");
         }
     }
 
@@ -79,19 +79,19 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                 user.setAge(resultSet.getByte("age"));
                 userList.add(user);
             }
-        } catch (SQLException ignored) {
-
+        } catch (SQLException e) {
+            System.out.println("Не удалось отобразить таблицу с пользователями!");
         }
         return userList;
     }
 
     //Очистка таблицы
     public void cleanUsersTable() {
-        String sql = "DELETE FROM users";
+        String sql = "delete from users";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
-        } catch (SQLException ignored) {
-
+        } catch (SQLException e) {
+            System.out.println("Не удалось очистить таблицу!");
         }
     }
 }

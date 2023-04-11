@@ -5,4 +5,16 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-resource" />
     </content>
   </component>
+  <component name="FacetManager">
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="Hibernate" />
+        <datasource-mapping>
+          <factory-entry name="TaskJDBC" value="89022044-5d31-44a9-b4f7-f9fec973ff9c" />
+        </datasource-mapping>
+        <naming-strategy-map />
+      </configuration>
+    </facet>
+  </component>
 </module>

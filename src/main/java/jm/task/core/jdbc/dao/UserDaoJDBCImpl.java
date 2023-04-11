@@ -49,6 +49,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
             preparedStatement.executeUpdate();
+            System.out.println("User с именем – " + name + " добавлен в базу данных ");
         } catch (SQLException e) {
             System.out.println("Не удалось добавить пользователя!");
         }
@@ -78,6 +79,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                 user.setLastName(resultSet.getString("lastname"));
                 user.setAge(resultSet.getByte("age"));
                 userList.add(user);
+                System.out.println(user);
             }
         } catch (SQLException e) {
             System.out.println("Не удалось отобразить таблицу с пользователями!");

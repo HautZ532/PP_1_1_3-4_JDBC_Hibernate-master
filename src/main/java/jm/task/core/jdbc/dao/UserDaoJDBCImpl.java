@@ -24,7 +24,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                   PRIMARY KEY (`id`))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8;""";
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Не удалось создать таблицу!");
@@ -47,8 +47,9 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
-            preparedStatement.setInt(3, age);
+            preparedStatement.setByte(3, age);
             preparedStatement.executeUpdate();
+            System.out.println("User с именем – " + name + " добавлен в базу данных ");
         } catch (SQLException e) {
             System.out.println("Не удалось добавить пользователя!");
         }
@@ -58,7 +59,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public void removeUserById(long id) {
         String sql = "delete from users where id = ?";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, (int) id);
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Не удалось удалить пользователя по ID!");
@@ -78,6 +79,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                 user.setLastName(resultSet.getString("lastname"));
                 user.setAge(resultSet.getByte("age"));
                 userList.add(user);
+                System.out.println(user);
             }
         } catch (SQLException e) {
             System.out.println("Не удалось отобразить таблицу с пользователями!");

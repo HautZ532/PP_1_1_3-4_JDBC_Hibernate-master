@@ -11,13 +11,13 @@ public class Util {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "1234";
 
-    public Connection getConnection(){
+    public Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Не удалось загрузить класс драйвера!");;
+            System.out.println("Не удалось загрузить класс драйвера!");
         }
         return connection;
     }

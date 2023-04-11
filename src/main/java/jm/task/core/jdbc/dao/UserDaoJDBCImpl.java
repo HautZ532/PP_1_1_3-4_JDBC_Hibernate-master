@@ -24,7 +24,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                   PRIMARY KEY (`id`))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8;""";
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Не удалось создать таблицу!");

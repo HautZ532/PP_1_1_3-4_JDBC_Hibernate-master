@@ -18,7 +18,6 @@ public class Util {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Не удалось загрузить класс драйвера!");
-            ;
         }
         return connection;
     }

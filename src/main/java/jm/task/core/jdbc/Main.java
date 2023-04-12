@@ -7,9 +7,9 @@ public class Main {
 
     public static void main(String[] args) {
         UserServiceImpl user = new UserServiceImpl();
-
-        //Создать таблицу
         user.createUsersTable();
+        //Создать таблицу
+        //user.createUsersTable();
 
         //Добавить 4 юзера с данными. Вывод в консоль по каждому юзеру.
         //user.saveUser("Stas", "Popov", (byte) 27);

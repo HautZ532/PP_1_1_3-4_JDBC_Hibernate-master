@@ -14,8 +14,20 @@ public class UserDaoHibernateImpl extends Util implements UserDao {
 
     @Override
     public void createUsersTable() {
+        String sql = """
+                create table if not exists `java_pre_project_1`.`users` (
+                  `id` INT NOT NULL AUTO_INCREMENT,
+                  `name` VARCHAR(45) NOT NULL,
+                  `lastname` VARCHAR(45) NOT NULL,
+                  `age` INT NOT NULL,
+                  PRIMARY KEY (`id`))
+                ENGINE = InnoDB
+                DEFAULT CHARACTER SET = utf8;""";
         try (Session session = getSessionFactory().openSession()){
             session.beginTransaction();
+            session.createQuery(sql);
+            session.getTransaction().commit();
+            getSessionFactory().close();
         }
     }
 

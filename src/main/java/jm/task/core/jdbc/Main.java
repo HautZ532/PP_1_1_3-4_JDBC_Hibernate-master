@@ -29,6 +29,6 @@ public class Main {
         user.cleanUsersTable();
 
         //Удалить таблицу
-        user.dropUsersTable();
+        //user.dropUsersTable();
     }
 }
